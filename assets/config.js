@@ -1,7 +1,8 @@
 // Public configuration only. Never put credentials or API keys here.
-// Activate these only after a real destination and official badge are approved.
+// Set a store to "available" only when its real Almost It? listing is public.
+// Its single URL activates both home-page placements, in French and English.
 window.ALMOST_IT_CONFIG = Object.freeze({
-  appStore: { url: null, badges: { fr: null, en: null } },
-  googlePlay: { url: null, badges: { fr: null, en: null } },
+  appStore: { status: "coming-soon", url: null },
+  googlePlay: { status: "coming-soon", url: null },
   contact: { email: null, formUrl: null }
 });

@@ -21,17 +21,33 @@
     if (typeof value !== "string") return null;
     try { const url = new URL(value); return url.protocol === "https:" && (!host || url.hostname === host) ? url.href : null; } catch (_) { return null; }
   };
-  const stores = document.getElementById("store-links");
-  if (stores) {
-    for (const [key, host, label] of [["appStore", "apps.apple.com", lang === "fr" ? "Télécharger sur l’App Store" : "Download on the App Store"], ["googlePlay", "play.google.com", lang === "fr" ? "Disponible sur Google Play" : "Get it on Google Play"]]) {
-      const store = config[key], url = approvedURL(store?.url, host), badge = store?.badges?.[lang];
-      // No badge or link is rendered until both the real URL and local artwork exist.
-      if (!url || typeof badge !== "string" || !/^\/assets\/[a-zA-Z0-9_./-]+$/.test(badge)) continue;
-      const link = document.createElement("a"), image = document.createElement("img");
-      link.href = url; image.src = badge; image.alt = label; image.height = 48;
-      link.append(image); stores.append(link); stores.hidden = false;
-      if (key === "appStore") document.getElementById("app-store-status").hidden = true;
-    }
+  // Both placements use the same availability and destination. Without JS,
+  // the HTML fallback remains visible, non-interactive and accurate pre-launch.
+  for (const [key, host, name] of [
+    ["appStore", "apps.apple.com", "App Store"],
+    ["googlePlay", "play.google.com", "Google Play"]
+  ]) {
+    const store = config[key];
+    const url = approvedURL(store?.url, host);
+    const destination = url ? new URL(url) : null;
+    const isListing = destination && !destination.username && !destination.password &&
+      (key === "appStore"
+        ? /^\/(?:[a-z]{2}\/)?app\/(?:[^/]+\/)?id[0-9]+\/?$/.test(destination.pathname)
+        : destination.pathname === "/store/apps/details" && !!destination.searchParams.get("id"));
+    if (store?.status !== "available" || !isListing) continue;
+    const label = lang === "fr"
+      ? (key === "appStore" ? "Télécharger sur l’App Store" : "Télécharger sur Google Play")
+      : (key === "appStore" ? "Download on the App Store" : "Get it on Google Play");
+    document.querySelectorAll('[data-store="' + key + '"]').forEach(card => {
+      const link = document.createElement("a");
+      link.className = card.className;
+      link.dataset.store = key;
+      link.href = url;
+      link.setAttribute("aria-label", label);
+      while (card.firstChild) link.append(card.firstChild);
+      link.querySelector(".store-status").textContent = lang === "fr" ? "Télécharger" : "Download";
+      card.replaceWith(link);
+    });
   }
   const contact = document.getElementById("contact-action");
   if (contact) {

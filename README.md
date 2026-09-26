@@ -26,8 +26,14 @@ Production URL: https://almostit.github.io/
 ## Configuration for a later launch
 
 `assets/config.js` contains only public, initially empty settings:
-- `appStore`: real Apple URL and approved local official badge files for both languages.
-- `googlePlay`: same arrangement, hidden until an Android release exists.
+- `appStore`: `status: "coming-soon"`, `url: null` until the real public Almost It? App Store listing exists.
+- `googlePlay`: the same settings; visible now, unavailable until the Android listing exists.
+
+Both stores appear under the hero artwork and in the bottom download section, in FR/EN. Unavailable cards are plain text with decorative platform icons, not links or disabled buttons; they do not enter the keyboard tab order. Their static HTML fallback also works without JavaScript.
+
+To activate a platform, edit **only its entry in `assets/config.js`**: set `status: "available"` and paste the verified public Almost It? listing URL into `url`. Both placements automatically become real, labelled download links with the exact same URL and visible keyboard focus. No HTML change or separate per-language URL is needed. Never activate a store before checking the real listing. HTTPS store listing paths are required (`apps.apple.com` / `play.google.com`); absent/invalid URLs or any other status leave the cards unavailable. Verify FR/EN and both placements after activation. Keep the other platform unavailable until its own release.
+
+Other configuration:
 - `contact`: an explicitly approved dedicated email or HTTPS form URL. No delivery service is included.
 
 The contact channel is not open yet. Privacy and Terms are clearly marked as pending.
@@ -36,7 +42,8 @@ Do not use these holding pages as final App Store support/legal documents.
 
 ## Assets and privacy
 
-Only the approved app icon artwork (`assets/icon.svg`, `assets/icon.png`) is reused.
+The approved app icon artwork (`assets/icon.svg`, `assets/icon.png`) is reused unchanged.
+`assets/app-store.svg` and `assets/google-play.svg` are decorative platform symbols in custom availability cards; these cards are not official downloadable store badges.
 All website HTML/CSS/JavaScript is written for this separate site. System fonts only.
 No app source, catalogue, internal document, credential, personal email or build belongs here.
 No open-source licence is granted by this repository.
