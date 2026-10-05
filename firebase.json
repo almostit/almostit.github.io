@@ -1,0 +1,23 @@
+{
+  "hosting": {
+    "site": "almost-it",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/.*/**",
+      "**/node_modules/**",
+      "**/*.log",
+      "**/*.md"
+    ]
+  },
+  "emulators": {
+    "hosting": {
+      "host": "127.0.0.1",
+      "port": 5005
+    },
+    "ui": {
+      "enabled": false
+    }
+  }
+}

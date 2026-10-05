@@ -3,3 +3,9 @@
 @media(max-width:600px){.hero-visual{width:100%;align-self:center}.hero-visual .hero-art{width:270px;margin:5px auto 12px}.hero-visual .store-links{margin-top:36px}.download .store-links{grid-template-columns:1fr}}
 @media(max-width:400px){.hero-visual .store-links{grid-template-columns:1fr;max-width:270px}}
 @media(min-width:601px) and (max-width:700px){.hero-visual .store-links{grid-template-columns:1fr;max-width:230px}}
+
+/* Long-form legal content uses the existing visual system. */
+.legal{overflow-wrap:anywhere}.legal section+section{margin-top:40px}.legal h3{font-size:21px;line-height:1.35;margin-top:32px}.legal h4{font-size:17px;line-height:1.45}.legal ul{padding-left:1.3em;color:#a89dba;font-size:17px;line-height:1.75}.legal li+li{margin-top:12px}.legal strong{color:#f7f3ff}.legal .document-date{font-size:13px;color:#d6c4ff}.statutory-notice{border:1px solid #9b71ff;border-radius:16px;padding:24px;margin:22px 0 32px;background:#120e1c}.statutory-notice p{font-size:15px;color:#d8cfe5;line-height:1.75}.statutory-notice p:last-child{margin-bottom:0}.error-translation{border-top:1px solid #30273f;margin-top:40px;padding-top:32px}.error-translation h2{font-size:32px}.site-footer nav{row-gap:4px}
+@media(max-width:400px){.statutory-notice{padding:16px}.legal .button{padding-inline:16px}.site-footer nav{column-gap:16px}}
+/* Business coordinates remain readable, selectable and secondary. */
+.legal .legal-meta{font-size:.875rem;line-height:1.7;color:#a89dba;font-weight:400}.legal .legal-meta a{color:inherit;font-weight:400}.legal ul.legal-meta li+li{margin-top:4px}.legal .primary-contact{color:#d6c4ff;font-size:1.0625rem}.legal .primary-contact a{font-weight:650}.legal .secondary-contact{margin-top:20px;margin-bottom:0}
